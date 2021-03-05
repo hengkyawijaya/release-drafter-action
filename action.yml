@@ -13,4 +13,4 @@ inputs:
     description: 'group of charater after the version 0.0.0<postfix>'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
