@@ -1,0 +1,16 @@
+name: 'Release Drafter Action'
+description: 'generate release from github action'
+inputs:
+  github-ref:
+    description: 'PR merge branch refs/pull/:prNumber/merge'
+    required: true
+  service: 
+    description: 'service name matched with label on github repo'
+    required: true
+  prefix:
+    description: 'group of charater before the version <prefix>0.0.0'
+  postfix:
+    description: 'group of charater after the version 0.0.0<postfix>'
+runs:
+  using: 'node12'
+  main: 'index.js'

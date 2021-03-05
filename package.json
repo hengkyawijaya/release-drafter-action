@@ -1,0 +1,11 @@
+{
+  "name": "release-drafter-action",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "@octokit/core": "^3.2.5"
+  }
+}
