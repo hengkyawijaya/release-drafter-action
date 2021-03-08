@@ -1,8 +1,11 @@
 ### Release Drafter Action
-Release Drafter Action is lightweight github action release drafter to help you to automate your release draft using merge event as the trigger. The version will increment automatically with some spec
+Release Drafter Action is lightweight github action release drafter to help you to automate your release draft using merge event as the trigger. The version will increment automatically with some spec below 
+```
 Major = unlimited
 Minor = max 99 -> after reach the max will back to 0 and then increment the major version
 Patch = max 99 -> after reach the max will back to 0 and thne increment the minor version
+```
+
 ### How To Use
 1. Open Your Repo, create labels on your repo, for example `learning-git`. This label will be use as service indentifier on the github action script.
 2. Create github action script on your repo 
