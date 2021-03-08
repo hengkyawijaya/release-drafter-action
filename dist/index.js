@@ -21,13 +21,7 @@ async function createRelease() {
     try {
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         console.log(`The event payload: ${payload}`);
-
-        const githubRef = core.getInput('github-ref')
-        var result = patternGithubRef.exec(githubRef)
-        if (result == null) {
-            console.log("invalid github-ref value")
-            return
-        }
+        const prnum = payload.number
 
         const service = core.getInput('service');
         if (service == ""){
@@ -38,7 +32,6 @@ async function createRelease() {
         const prefix = core.getInput('prefix');
         const postfix = core.getInput('postfix');
     
-        var prnum = result.groups.prnum  
         response = await octokit.request(`GET /repos/${owner}/${repo}/pulls/${prnum}`, {
             owner: owner,
             repo: repo,
