@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const Octokit = require("@octokit/core").Octokit
+const github = require('@actions/github');
 
 const releaseType = "patch"
 const patternRelease = /(?<prefix>[a-zA-Z]+)?(?<major>\d+)(\.)(?<minor>\d+)(\.)(?<patch>\d+)?(?<postfix>[a-zA-Z]+)?/g
@@ -11,6 +12,9 @@ const octokit = new Octokit({ auth: githubToken });
 
 async function createRelease() {
     try {
+        const payload = JSON.stringify(github.context.payload, undefined, 2)
+        console.log(`The event payload: ${payload}`);
+
         const githubRef = core.getInput('github-ref')
         var result = patternGithubRef.exec(githubRef)
         if (result == null) {
