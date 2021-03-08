@@ -1,9 +1,6 @@
 name: 'Release Drafter Action'
 description: 'generate release from github action'
 inputs:
-  github-ref:
-    description: 'PR merge branch refs/pull/:prNumber/merge'
-    required: true
   service: 
     description: 'service name matched with label on github repo'
     required: true
