@@ -12,9 +12,7 @@ const octokit = new Octokit({ auth: githubToken });
 
 async function createRelease() {
     try {
-        const payload = JSON.stringify(github.context.payload, undefined, 2)
-        console.log(`The event payload: ${payload}`);
-        const prnum = payload.number
+        const prnum = github.context.payload.number
 
         const service = core.getInput('service');
         if (service == ""){
