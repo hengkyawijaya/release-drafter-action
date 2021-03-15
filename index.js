@@ -3,7 +3,7 @@ const Octokit = require("@octokit/core").Octokit
 const github = require('@actions/github');
 
 const releaseType = "patch"
-const patternRelease = /(?<prefix>[a-zA-Z]+)?(?<major>\d+)(\.)(?<minor>\d+)(\.)(?<patch>\d+)?(?<postfix>[a-zA-Z]+)?/g
+const patternRelease = /(?<prefix>[a-zA-Z0-9\-]+)?(?<major>\d+)(\.)(?<minor>\d+)(\.)(?<patch>\d+)?(?<postfix>[a-zA-Z0-9\-]+)?/g
 const patternGithubRef = /(refs\/pull\/)(?<prnum>\d+)(\/merge)$/g
 const owner = process.env.OWNER
 const repo = process.env.REPO
