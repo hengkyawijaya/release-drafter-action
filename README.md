@@ -31,8 +31,8 @@ jobs:
           REPO: 'LearningGit'
           OWNER: 'hengkyawijaya'
           GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
-      id: hello
-      uses: hengkyawijaya/release-drafter-action@v0.0.4
+      id: release_drafter
+      uses: hengkyawijaya/release-drafter-action@v0.0.5
       with:
         service: 'learning-git'
         prefix: 'v'
