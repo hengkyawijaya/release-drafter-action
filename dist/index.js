@@ -10,8 +10,7 @@ const Octokit = __nccwpck_require__(852).Octokit
 const github = __nccwpck_require__(109);
 
 const releaseType = "patch"
-const patternRelease = /(?<prefix>[a-zA-Z]+)?(?<major>\d+)(\.)(?<minor>\d+)(\.)(?<patch>\d+)?(?<postfix>[a-zA-Z]+)?/g
-const patternGithubRef = /(refs\/pull\/)(?<prnum>\d+)(\/merge)$/g
+const patternRelease = /(?<prefix>[a-zA-Z0-9\-]+)?(?<major>\d+)(\.)(?<minor>\d+)(\.)(?<patch>\d+)?(?<postfix>[a-zA-Z0-9\-]+)?/g
 const owner = process.env.OWNER
 const repo = process.env.REPO
 const githubToken = process.env.GITHUB_TOKEN
@@ -78,7 +77,7 @@ async function createRelease() {
         var latestRelease = ""
         var latestMajor = 0
         var latestMinor = 0
-        var latestPatch = 0       
+        var latestPatch = 0 
         for (const release of response.data) {
             var regexPattern = new RegExp(patternRelease, 'i')
             var result = regexPattern.exec(release.tag_name)
@@ -105,15 +104,17 @@ async function createRelease() {
         }
 
         changesLog = `* ${title} #${prnum} @${user.login}`
+        console.log('latest release:', latestRelease, ', draft:', isDraftExist)
+
         if(isDraftExist) { 
-            console.log('existing latest release:', latestRelease)
+            console.log('using existing draft release:', latestRelease)
             await appendChangesLog(latestRelease, existingDraftID, changesLog)
             return
         }
 
         var { latestMajor, latestMinor, latestPatch } = increaseVersion(releaseType, latestMajor, latestMinor, latestPatch)
         latestRelease = `${prefix}${latestMajor}.${latestMinor}.${latestPatch}${postfix}`
-        console.log('new latest release:', latestRelease)
+        console.log('create new draft release:', latestRelease)
         await generateNewRelease(latestRelease, changesLog)
 
     } catch(err) {
